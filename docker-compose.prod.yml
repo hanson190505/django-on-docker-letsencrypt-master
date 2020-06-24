@@ -1,7 +1,20 @@
 version: '3.7'
 
 services:
+  api:
+    container_name: api
+    build:
+      context: ./maskweb
+      dockerfile: Dockerfile.prod
+    command: gunicorn maskweb.wsgi:application --bind 0.0.0.0:8001
+    expose:
+      - 8001
+    env_file:
+      - .env.api.prod
+    depends_on:
+      - db
   web:
+    container_name: web
     build:
       context: ./app
       dockerfile: Dockerfile.prod
@@ -16,6 +29,7 @@ services:
     depends_on:
       - db
   db:
+    container_name: db
     image: postgres:12.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/

@@ -1,0 +1,23 @@
+{% extends 'products/products_index.html' %}
+{% block meta %}
+	<meta name="description" content="some seo description">
+	<meta name="keywords" content="some seo keywords">
+{% endblock %}
+{% block products-content %}
+	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+		{% for product in products_list %}
+			{{ product.productdetail_set.first.image }}
+			<a href="{% url 'product-id' product.id %}">
+				<div class="col" style="padding-left: 0">
+					<div class="card">
+						<img src="http://127.0.0.1:8000/{{ product.productdetail_set.first.image  }}" class="card-img-top" alt="card">
+						<div class="card-body text-center">
+							<h5 class="card-title">{{ product.pro_name }}</h5>
+							<p class="card-text">{{ product.pro_desc }}</p>
+						</div>
+					</div>
+				</div>
+			</a>
+		{% endfor %}
+	</div>
+{% endblock %}

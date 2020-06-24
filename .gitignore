@@ -3,9 +3,17 @@ __pycache
 .DS_Store
 .env.dev
 .env.prod
+.env.api.prod
 .env.prod.db
+.idea
+env
+maskweb/maskenv
+maskweb/db.sqlite3
 
 .env.staging
 .env.staging.db
 .env.prod.proxy-companion
 .env.staging.proxy-companion
+
+
+
