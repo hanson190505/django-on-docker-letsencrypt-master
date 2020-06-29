@@ -6,9 +6,9 @@ services:
     build:
       context: ./maskweb
       dockerfile: Dockerfile.prod
-    command: gunicorn maskweb.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn maskweb.wsgi:application --bind 0.0.0.0:8001
     expose:
-      - 8000
+      - 8001
     env_file:
       - .env.api.prod
     depends_on:
