@@ -1,6 +1,18 @@
 version: '3.7'
 
 services:
+  api:
+    container_name: api
+    build:
+      context: ./maskweb
+      dockerfile: Dockerfile.prod
+    command: gunicorn maskweb.wsgi:application --bind 0.0.0.0:8000
+    expose:
+      - 8000
+    env_file:
+      - .env.api.prod
+    depends_on:
+      - db
   web:
     build:
       context: ./app
