@@ -13,6 +13,8 @@ services:
       - .env.api.prod
     depends_on:
       - db
+    networks:
+      - nginx-proxy
   web:
     container_name: web
     build:
@@ -28,6 +30,8 @@ services:
       - .env.prod
     depends_on:
       - db
+    networks:
+      - nginx-proxy
   db:
     container_name: db
     image: postgres:12.0-alpine
@@ -35,6 +39,8 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - .env.prod.db
+    networks:
+      - nginx-proxy
   nginx-proxy:
     container_name: nginx-proxy
     build: nginx
@@ -62,6 +68,10 @@ services:
       - vhost:/etc/nginx/vhost.d
     depends_on:
       - nginx-proxy
+
+networks:
+  nginx-proxy:
+    name: nginx-proxy
 
 volumes:
   postgres_data:
